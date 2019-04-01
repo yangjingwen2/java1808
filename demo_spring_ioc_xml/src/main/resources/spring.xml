@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--跟标签，在跟标签内部配置Java对象-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--凡是需要Spring秘书管理的类，都需要配置到xml文件中-->
+
+    <!--id是当前bean标签的唯一标识，自定义的一个名词-->
+    <!--class定义Java类的路径：包名+类名-->
+    <!--注意：bean标签只能定义类，不能是抽象类或者接口-->
+    <bean id="greenTeaWater" class="com.qianfeng.GreenTeaWater"></bean>
+
+    <bean id="leader" class="com.qianfeng.MaLeader">
+        <!--property配置属性，name是MaLeader类中的全局属性-->
+        <!--ref（reference）关联bean的Id配置-->
+        <!--这种关联告诉Spring需要通过id为greenTeaWater的bean创建对象，并且注入到water属性中-->
+        <property name="water1" ref="greenTeaWater"/>
+    </bean>
+
+</beans>
