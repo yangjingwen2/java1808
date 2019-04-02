@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,12 +33,16 @@ public class SpringBeans {
      * @param sqlSessionFactory
      * @return
      */
+    @Scope("prototype")
     @Bean
     public SqlSession provideSession(SqlSessionFactory sqlSessionFactory){
-        System.out.println("--------------session-------------");
+
+        System.out.println(Thread.currentThread().getName());
+
         //session优化问题？？？
         SqlSession session1 = threadLocal.get();
         if (session1 == null){
+            System.out.println("--------------open session-------------");
             session1 = sqlSessionFactory.openSession();
             threadLocal.set(session1);
         }
