@@ -8,6 +8,6 @@
 
     <!--配置需要扫描的包-->
     <!--等同于@ComponentScan注解-->
-    <context:component-scan base-package="com.qianfeng.ioc,com.qianfeng.coffee"/>
+    <context:component-scan base-package="com.qianfeng.ioc,com.qianfeng.coffee,com.qianfeng.tea"/>
 
 </beans>
