@@ -8,6 +8,10 @@
 
     <!--只扫描@Component，不能扫描@Mapper-->
     <context:component-scan base-package="com.qianfeng.service,com.qianfeng.dao"/>
+    <!--扫描@Mapper文件-->
+    <bean id="mapperScan" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.qianfeng.dao"/>
+    </bean>
 
 
     <!--配置连接池-->
@@ -26,10 +30,7 @@
         <property name="mapperLocations" value="mapper/student.mapper.xml"/>
     </bean>
 
-    <!--扫描@Mapper文件-->
-    <bean id="mapperScan" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.qianfeng.dao"/>
-    </bean>
+
 
 
 </beans>

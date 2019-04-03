@@ -16,6 +16,6 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public TbStudent queryStudentById(Long stuId) {
-        return null;
+        return studentMapper.queryStudentById(stuId);
     }
 }
