@@ -1,0 +1,37 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>baseServlet</servlet-name>
+    <servlet-class>com.qianfeng.fxmall.goods.controller.BaseServlet</servlet-class>
+    <!--Tomcat容器启动的时候，初始化当前Servlet-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+
+  <servlet>
+    <servlet-name>goodsServlet</servlet-name>
+    <servlet-class>com.qianfeng.fxmall.goods.controller.GoodsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>goodsDetalsServlet</servlet-name>
+    <servlet-class>com.qianfeng.fxmall.goods.controller.GoodsDetailsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>baseServlet</servlet-name>
+    <url-pattern>/basexxxx</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>goodsServlet</servlet-name>
+    <url-pattern>/goods.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>goodsDetalsServlet</servlet-name>
+    <url-pattern>/goodsDetails.do</url-pattern>
+  </servlet-mapping>
+</web-app>

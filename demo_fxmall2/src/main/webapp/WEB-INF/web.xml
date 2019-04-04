@@ -1,0 +1,54 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--定义一个上下文参数-->
+  <context-param>
+    <param-name>java</param-name>
+    <param-value>qianfeng</param-value>
+  </context-param>
+
+  <!--定义了一个变量，项目的全局变量-->
+  <!--项目的参数-->
+  <!--contextConfigLocation=“classpath:spring.xml”-->
+  <context-param>
+    <!--名称必须要命名为contextConfigLocation-->
+    <!--定义当前Spring配置文件的路径-->
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring.xml</param-value>
+  </context-param>
+
+  <!--完成SPring容器的初始化-->
+  <!--spring加载配置，初始化容器-->
+  <!--以下监听器在加载spring的配置文件，完成Spring的初始化-->
+  <!--完成如下操作：ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+  -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <listener>
+    <listener-class>com.qianfeng.fxmall.commons.listener.TomcatInitListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>goodsServlet</servlet-name>
+    <servlet-class>com.qianfeng.fxmall.goods.controller.GoodsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>goodsDetalsServlet</servlet-name>
+    <servlet-class>com.qianfeng.fxmall.goods.controller.GoodsDetailsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>goodsServlet</servlet-name>
+    <url-pattern>/goods.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>goodsDetalsServlet</servlet-name>
+    <url-pattern>/goodsDetails.do</url-pattern>
+  </servlet-mapping>
+</web-app>
