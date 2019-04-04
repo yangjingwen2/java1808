@@ -1,4 +1,4 @@
-package com.qianfeng;
+package com.qianfeng.fxmall;
 
 import com.qianfeng.fxmall.goods.bean.WxbGood;
 import com.qianfeng.fxmall.goods.service.ISpringGoodsService;
@@ -17,7 +17,7 @@ public class SpringTest {
 
     @Test
     public void testCase1(){
-        WxbGood wxbGood = goodsService.queryGoodsById("1");
+        WxbGood wxbGood = goodsService.queryGoodsById("14886110");
         System.out.println(wxbGood);
     }
 }
