@@ -15,14 +15,15 @@ public class ProxyCGLibModel implements MethodInterceptor {
      * @param o 被代理的对象
      * @param method 被代理的对象的方法
      * @param args 方法的参数
-     * @param methodProxy 字节码重组之后的代理对象
+     * @param methodProxy 字节码重组之后的代理对象中的方法
      * @return
      * @throws Throwable
      */
     @Override
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         System.out.println("------------");
-        Object result = methodProxy.invokeSuper(o, args);
+//        Object result = methodProxy.invokeSuper(o, args);
+        Object result = methodProxy.invokeSuper(o,args);
         System.out.println(">>>>>>>>>>>>");
         return result;
     }
