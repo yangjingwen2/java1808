@@ -17,4 +17,6 @@ public class SpringGoodsServiceImpl implements ISpringGoodsService {
         WxbGood goods = goodsMapper.queryGoodsById(id);
         return goods;
     }
+
+
 }

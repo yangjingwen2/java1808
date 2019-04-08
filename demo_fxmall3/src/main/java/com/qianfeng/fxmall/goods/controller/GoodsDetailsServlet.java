@@ -24,7 +24,8 @@ public class GoodsDetailsServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        goodsService = applicationContext.getBean(SpringGoodsServiceImpl.class);
+        //如果要获取代理对象，不同通过getBean（Class）形式获取。只能通过对象名称获取
+        goodsService = (ISpringGoodsService) applicationContext.getBean("springGoodsServiceImpl");
         WxbGood wxbGood = goodsService.queryGoodsById("14886110");
         System.out.println(wxbGood.getGoodName());
 

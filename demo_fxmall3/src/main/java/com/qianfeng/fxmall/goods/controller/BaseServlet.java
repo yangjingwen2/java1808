@@ -12,7 +12,7 @@ public class BaseServlet extends HttpServlet {
         System.out.println(">>>>>>>初始化Spring容器>>>>>>>>>>>");
         applicationContext = new ClassPathXmlApplicationContext("spring.xml");
     }
-
+    
 
 
 
