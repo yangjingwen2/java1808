@@ -4,16 +4,31 @@
 
 <web-app>
   <display-name>springmvc demo</display-name>
+  <!--监听器的方式进行Spring容器的初始化-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring.xml</param-value>
+  </context-param>
+  <!--ContextLoaderListener用来监听Tomcat启动的时候进行Spring容器的初始化-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
   <servlet>
     <servlet-name>spring</servlet-name>
     <!--完成SPring容器的初始化的一个核心Servlet-->
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!--指定配置文件的名称和路径-->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring.xml</param-value>
+      <param-value></param-value>
     </init-param>
+    <!--指定配置文件的名称和路径-->
+    <!--<init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring.xml</param-value>
+    </init-param>-->
+    <!--取值1-7，数字越小越先执行-->
+    <!--<load-on-startup>1</load-on-startup>-->
   </servlet>
 
   <servlet-mapping>
