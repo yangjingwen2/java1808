@@ -1,9 +1,11 @@
 package com.qianfeng.user.service;
 
 import com.qianfeng.user.exception.PasswordErrorException;
+import com.qianfeng.user.exception.UsernameNotFoundException;
 import com.qianfeng.user.mapper.UserMapper;
 import com.qianfeng.user.po.TbUser;
 import com.qianfeng.user.utils.MD5Utils;
+import com.qianfeng.user.vo.LoginInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +17,22 @@ public class UserService {
 
     /**
      * 登录
-     * @param username
-     * @param password 密码明文
+     * @param loginInfoVO
      */
-    public TbUser login(String username,String password) throws Exception{
-        if (null == username) {
+    public TbUser login(LoginInfoVO loginInfoVO) throws Exception{
+        if (loginInfoVO == null) {
+            throw new NullPointerException("param is null");
+        }
+        String username = loginInfoVO.getUsername();
+        String password = loginInfoVO.getPassword();
+        if (null == username || "".equals(username)) {
             throw new NullPointerException("username is null");
         }
 
         //1、检验用户名在数据库是否存在
         TbUser tbUser = userMapper.checkUsername(username);
         if (tbUser == null) {
-            throw new NullPointerException("username not found");
+            throw new UsernameNotFoundException();
         }
 
         //2、密码校验

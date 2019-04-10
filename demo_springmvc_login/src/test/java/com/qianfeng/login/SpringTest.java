@@ -17,12 +17,12 @@ public class SpringTest {
 
     @Test
     public void testCase1(){
-        TbUser tbUser = null;
-        try {
-            tbUser = userService.login("zhangsan", "123");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(tbUser);
+//        TbUser tbUser = null;
+//        try {
+//            tbUser = userService.login("zhangsan", "123");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(tbUser);
     }
 }
