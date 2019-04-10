@@ -75,4 +75,14 @@ public class UserController {
         model.addAttribute("param","千锋Java3");
         return "hello.jsp";
     }
+
+    /**
+     * 重定向：重定向不能进行参数传递
+     * @return
+     */
+    @RequestMapping("/login4")
+    public String login4(){
+        System.out.println(">>>>重定向>>>>");
+        return "redirect:hello.jsp";
+    }
 }
