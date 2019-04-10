@@ -31,12 +31,28 @@
     <!--<load-on-startup>1</load-on-startup>-->
   </servlet>
 
+
+
   <servlet-mapping>
     <servlet-name>spring</servlet-name>
     <!--/ 不会匹配.jsp后缀-->
     <!--/* 匹配所有-->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <!--默认的servlet，在tomcat中。-->
+  <!--<servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.png</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+  </servlet-mapping>-->
 
 
 </web-app>

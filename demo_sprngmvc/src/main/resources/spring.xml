@@ -10,7 +10,17 @@
     <!--识别Component注解-->
     <context:component-scan base-package="com.qianfeng.controller"/>
 
+    <!--解决静态资源不能访问的配置-->
+    <mvc:default-servlet-handler/>
+
     <!--识别MVC的注解-->
     <mvc:annotation-driven/>
+
+    <!--视图解析器-->
+    <!--配置此视图解析器，可以是jsp页面的jstl标签生效-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/page/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
 </beans>

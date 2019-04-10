@@ -4,9 +4,7 @@ import com.qianfeng.bean.LoginInfoVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -72,8 +70,8 @@ public class UserController {
     public String login3(LoginInfoVO loginInfoVO,Model model){
         System.out.println("-------------->" + loginInfoVO.getUsername());
         //值传递
-        model.addAttribute("param","千锋Java3");
-        return "hello.jsp";
+        model.addAttribute("param3","千锋Java3");
+        return "hello";
     }
 
     /**
@@ -85,4 +83,10 @@ public class UserController {
         System.out.println(">>>>重定向>>>>");
         return "redirect:hello.jsp";
     }
+
+//    @RequestMapping("/images/abc.png")
+//    public String test(){
+//        System.out.println(">>>>>请求图片，反而进入了Controller");
+//        return "hello.jsp";
+//    }
 }

@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Hello SpringMVC! <%=request.getAttribute("param")%></h1>
+<h1>Hello SpringMVC! <%=request.getAttribute("param3")%></h1>
+<h2>${param3}---</h2>
 </body>
 </html>
