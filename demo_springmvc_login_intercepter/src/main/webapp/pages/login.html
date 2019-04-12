@@ -27,6 +27,8 @@
                 if (data.code == 1) {
                     //登录成功
                     window.location.href="hello.jsp";
+                } else  if (data.code==2){
+                    window.location.href=data.msg;
                 } else {
                     alert("登录失败："+data.msg);
                 }

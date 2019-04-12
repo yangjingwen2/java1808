@@ -45,21 +45,21 @@
 
     <!--配置拦截器-->
     <!--mvc:interceptors配置所有拦截器的根标签-->
-    <mvc:interceptors>
-        <!--正在执行拦截任务的拦截器-->
+    <!--<mvc:interceptors>
+        &lt;!&ndash;正在执行拦截任务的拦截器&ndash;&gt;
         <mvc:interceptor>
 
-            <!--拦截规则，路径。/**代表拦截所有URL-->
-            <mvc:mapping path="/**"/>
-            <!--将所有静态资源放行-->
+            &lt;!&ndash;拦截规则，路径。/**代表拦截所有URL&ndash;&gt;
+            &lt;!&ndash;<mvc:mapping path="/**"/>&ndash;&gt;
+            &lt;!&ndash;将所有静态资源放行&ndash;&gt;
             <mvc:exclude-mapping path="/js/jquery-3.1.1.js"/>
             <mvc:exclude-mapping path="/pages/login.html"/>
             <mvc:exclude-mapping path="/user/*"/>
 
-            <!--真正的拦截器，拦截器的实例-->
+            &lt;!&ndash;真正的拦截器，拦截器的实例&ndash;&gt;
             <bean class="com.qianfeng.user.intercepter.PermissionIntercepter"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 
 
 

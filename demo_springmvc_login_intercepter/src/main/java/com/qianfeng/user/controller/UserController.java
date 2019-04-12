@@ -45,30 +45,34 @@ public class UserController {
      */
     @ResponseBody
     @PostMapping("/login2")
-    public JsonResultVO loginAjax(LoginInfoVO loginInfoVO, HttpSession session){
-        JsonResultVO jsonResultVO = new JsonResultVO();
+    public JsonResultVO loginAjax(LoginInfoVO loginInfoVO, HttpSession session) throws Exception{
+//        JsonResultVO jsonResultVO = new JsonResultVO();
+        JsonResultVO jsonResultVO = null;
         try {
             UserPermissionInfo user = userService.login(loginInfoVO);
             session.setAttribute("user",user);
             jsonResultVO.setCode(1);
 
             System.out.println("--->"+user.getPermissionList().get(0));
-        } catch (NullPointerException e){
-            e.printStackTrace();
-//            return "{code:0,msg:'请输入用户名'}";
-            jsonResultVO.setCode(0);
-            jsonResultVO.setMsg("请输入用户名");
-        } catch (UsernameNotFoundException|PasswordErrorException e) {
+        }
+//        catch (NullPointerException e){
+//            e.printStackTrace();
+////            return "{code:0,msg:'请输入用户名'}";
+//            jsonResultVO.setCode(0);
+//            jsonResultVO.setMsg("请输入用户名");
+//        }
+        catch (UsernameNotFoundException|PasswordErrorException e) {
             e.printStackTrace();
 //            return "{code:0,msg:'用户名或者密码错误'}";
             jsonResultVO.setCode(0);
             jsonResultVO.setMsg("用户名或者密码错误");
-        } catch (Exception e) {
-            e.printStackTrace();
-//            return "{code:0,msg:'请联系管理员!'}";
-            jsonResultVO.setCode(0);
-            jsonResultVO.setMsg("请联系管理员");
         }
+//        catch (Exception e) {
+//            e.printStackTrace();
+////            return "{code:0,msg:'请联系管理员!'}";
+//            jsonResultVO.setCode(0);
+//            jsonResultVO.setMsg("请联系管理员");
+//        }
         /*重定向不会经过视图解析器*/
         //{code:1,msg:'登录成功'}，code是用来进行条件判断的，msg用来显示
        return jsonResultVO;
