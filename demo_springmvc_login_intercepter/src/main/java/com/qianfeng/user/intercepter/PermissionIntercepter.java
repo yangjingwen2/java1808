@@ -1,9 +1,11 @@
 package com.qianfeng.user.intercepter;
 
+import com.qianfeng.user.info.UserPermissionInfo;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 权限拦截
@@ -24,21 +26,33 @@ public class PermissionIntercepter implements HandlerInterceptor {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println(username+"/"+password);
-//        response.getWriter().println("这是拦截器响应");
-
-        StringBuffer requestURL = request.getRequestURL();
-        if (requestURL.toString().endsWith("/user/login2")){
-            return true;
-        }
 
         //判断用户是否登录
-        Object user = request.getSession().getAttribute("user");
+        UserPermissionInfo user = (UserPermissionInfo) request.getSession().getAttribute("user");
         if (null == user) {
             System.out.println("--->>>>");
             String contextPath = request.getContextPath();
             response.sendRedirect(contextPath + "/pages/login.html");
             return false;
         }
+
+        //用户权限列表
+        List<String> permissionList = user.getPermissionList();
+
+        StringBuffer requestURL = request.getRequestURL();
+
+        String path = requestURL.toString();
+        int startIndex = path.lastIndexOf("/");
+
+        String funcationName = path.substring(startIndex+1);
+
+
+        if (!permissionList.contains(funcationName)) {
+            String contextPath = request.getContextPath();
+                response.sendRedirect(contextPath+"/error.jsp");
+                return false;
+            }
+
         return true;
     }
 }

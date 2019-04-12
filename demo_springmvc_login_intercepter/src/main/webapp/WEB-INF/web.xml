@@ -35,7 +35,13 @@
     <servlet-name>spring</servlet-name>
     <!--/ 不会匹配.jsp后缀-->
     <!--/* 匹配所有-->
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <!--/ 不会匹配.jsp后缀-->
+    <!--/* 匹配所有-->
+    <url-pattern>*.jsp</url-pattern>
   </servlet-mapping>
 
 

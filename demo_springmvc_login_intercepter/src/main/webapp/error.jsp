@@ -11,6 +11,6 @@
     <title>exception</title>
 </head>
 <body>
-<h1>页面走丢了~</h1>
+<h1>您没有权限~</h1>
 </body>
 </html>

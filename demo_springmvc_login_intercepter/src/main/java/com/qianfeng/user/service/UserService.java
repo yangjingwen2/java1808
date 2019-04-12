@@ -2,6 +2,7 @@ package com.qianfeng.user.service;
 
 import com.qianfeng.user.exception.PasswordErrorException;
 import com.qianfeng.user.exception.UsernameNotFoundException;
+import com.qianfeng.user.info.UserPermissionInfo;
 import com.qianfeng.user.mapper.UserMapper;
 import com.qianfeng.user.po.TbUser;
 import com.qianfeng.user.utils.MD5Utils;
@@ -19,7 +20,7 @@ public class UserService {
      * 登录
      * @param loginInfoVO
      */
-    public TbUser login(LoginInfoVO loginInfoVO) throws Exception{
+    public UserPermissionInfo login(LoginInfoVO loginInfoVO) throws Exception{
         if (loginInfoVO == null) {
             throw new NullPointerException("param is null");
         }
@@ -30,7 +31,7 @@ public class UserService {
         }
 
         //1、检验用户名在数据库是否存在
-        TbUser tbUser = userMapper.checkUsername(username);
+        UserPermissionInfo tbUser = userMapper.checkUsername2(username);
         if (tbUser == null) {
             throw new UsernameNotFoundException();
         }

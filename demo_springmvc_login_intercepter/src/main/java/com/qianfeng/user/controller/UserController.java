@@ -2,6 +2,7 @@ package com.qianfeng.user.controller;
 
 import com.qianfeng.user.exception.PasswordErrorException;
 import com.qianfeng.user.exception.UsernameNotFoundException;
+import com.qianfeng.user.info.UserPermissionInfo;
 import com.qianfeng.user.po.TbUser;
 import com.qianfeng.user.service.UserService;
 import com.qianfeng.user.vo.JsonResultVO;
@@ -24,7 +25,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(LoginInfoVO loginInfoVO, HttpSession session){
         try {
-            TbUser user = userService.login(loginInfoVO);
+            UserPermissionInfo user = userService.login(loginInfoVO);
             session.setAttribute("user",user);
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,9 +48,11 @@ public class UserController {
     public JsonResultVO loginAjax(LoginInfoVO loginInfoVO, HttpSession session){
         JsonResultVO jsonResultVO = new JsonResultVO();
         try {
-            TbUser user = userService.login(loginInfoVO);
+            UserPermissionInfo user = userService.login(loginInfoVO);
             session.setAttribute("user",user);
             jsonResultVO.setCode(1);
+
+            System.out.println("--->"+user.getPermissionList().get(0));
         } catch (NullPointerException e){
             e.printStackTrace();
 //            return "{code:0,msg:'请输入用户名'}";

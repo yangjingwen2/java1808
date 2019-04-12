@@ -7,8 +7,28 @@
         <result property="passwordSalt" column="password_salt" javaType="java.lang.String"/>
     </resultMap>
 
+    <resultMap id="userPermissionResultMap" type="com.qianfeng.user.info.UserPermissionInfo">
+        <id property="userId" column="user_id" javaType="java.lang.Long"/>
+        <result property="passwordSalt" column="password_salt" javaType="java.lang.String"/>
+        <result property="username" column="username" javaType="java.lang.String"/>
+        <result property="password" column="password" javaType="java.lang.String"/>
+        <result property="roleName" column="role_name" javaType="java.lang.String"/>
+        <collection property="permissionList" column="role_id" ofType="java.lang.String" select="queryPermissionByRoleId"/>
+    </resultMap>
+
+
     <!--登录的SQL-->
     <select id="checkUsername" resultMap="baseResultMap">
         select user_id,username,password,password_salt from tb_user where username=#{username};
+    </select>
+
+    <select id="checkUsername2" resultMap="userPermissionResultMap">
+        select u.user_id,u.username,u.password,u.password_salt,r.role_name,r.role_id from tb_user u join tb_role r
+            on u.user_id=r.user_id
+            and u.username=#{username};
+    </select>
+
+    <select id="queryPermissionByRoleId" resultType="java.lang.String">
+        select permission_name from tb_permission where role_id=#{roleId}
     </select>
 </mapper>
