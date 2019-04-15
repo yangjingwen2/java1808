@@ -1,6 +1,7 @@
 package com.qianfeng.controller;
 
 import com.qianfeng.bean.BookInfo;
+import com.qianfeng.bean.JsonResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,5 +40,53 @@ public class BookController {
     public BookInfo queryBookById(@PathVariable("bookId") Integer id){
         BookInfo bookInfo = bookList.get(id - 1);
         return bookInfo;
+    }
+
+    /**
+     * 新增
+     * @param bookInfo
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public JsonResultVO save(BookInfo bookInfo){
+        bookList.add(bookInfo);
+        JsonResultVO jsonResultVO = new JsonResultVO();
+        jsonResultVO.setCode(1);
+        jsonResultVO.setData("新增成功");
+        return jsonResultVO;
+    }
+
+
+    /**
+     * delete、put、post、get 都是http协议中的请求策略
+     *
+     * 浏览器不支持delete、put等
+     * @param bookId
+     * @return
+     */
+    @RequestMapping(value = "/{bookId}",method = RequestMethod.DELETE)
+    public JsonResultVO delete(@PathVariable("bookId") int bookId){
+
+        bookList.remove(bookId-1);
+        JsonResultVO jsonResultVO = new JsonResultVO();
+        jsonResultVO.setCode(1);
+        jsonResultVO.setData("删除成功");
+        return jsonResultVO;
+    }
+
+    /**
+     * 修改
+     * @param bookInfo
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.PUT)
+    public JsonResultVO update(BookInfo bookInfo){
+
+        bookList.remove(bookInfo.getBookId()-1);
+        bookList.set(bookInfo.getBookId()-1,bookInfo);
+        JsonResultVO jsonResultVO = new JsonResultVO();
+        jsonResultVO.setCode(1);
+        jsonResultVO.setData("修改成功");
+        return jsonResultVO;
     }
 }
