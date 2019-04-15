@@ -2,10 +2,7 @@ package com.qianfeng.controller;
 
 import com.qianfeng.bean.BookInfo;
 import com.qianfeng.bean.JsonResultVO;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
  * REST架构风格的Controller
  * 特点：每一个方法默认返回json对象
  */
+@CrossOrigin //允许跨域。。前端解决跨域是jsonp
 @RestController
 @RequestMapping("book")
 public class BookController {
@@ -88,5 +86,11 @@ public class BookController {
         jsonResultVO.setCode(1);
         jsonResultVO.setData("修改成功");
         return jsonResultVO;
+    }
+
+    @RequestMapping(value = "/page/{page}",method = RequestMethod.GET)
+    public List<BookInfo> queryBookByPage(@PathVariable("page") int page){
+        List<BookInfo> subList = bookList.subList((page - 1)*3, page * 3);
+        return subList;
     }
 }
