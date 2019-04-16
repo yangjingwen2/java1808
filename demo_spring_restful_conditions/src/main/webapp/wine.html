@@ -10,25 +10,26 @@
     </style>
 </head>
 <body>
-<button onclick="conditions()">葡萄酒</button>
+<button onclick="conditions('z2')">葡萄酒</button>
 产地：
     <ul id="list" class="list">
     </ul>
 
 <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
 <script type="text/javascript">
-    function conditions() {
+    function conditions(condition) {
         var ulTag = document.getElementById("list");
         $.ajax({
-           url:"http://localhost:8080//wine/wine/z2/1",
+           url:"http://localhost:8080//wine/wine/"+condition+"/1",
            method:"GET",
            success:function (data) {
+               ulTag.innerHTML="";
                var str="";
                for (var i = 0; i < data.length; i++) {
                    var name = data[i].name;
-                   var url = "http://localhost:8080/"+data[i].url;
+                   var url = data[i].url;
                    // ulTag.appendChild("<li><a href='"+url+"'>"+name+"</a></li>")
-                   str=str+"<li><a href='"+url+"'>"+name+"</a></li><br/>";
+                   str=str+"<li><a href=\"javascript:conditions('"+url+"')\">"+name+"</a></li><br/>";
 
                }
 
