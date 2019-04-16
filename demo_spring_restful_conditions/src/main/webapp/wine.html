@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>酒水</title>
+    <style type="text/css">
+        .list li{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<button onclick="conditions()">葡萄酒</button>
+产地：
+    <ul id="list" class="list">
+    </ul>
+
+<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+    function conditions() {
+        var ulTag = document.getElementById("list");
+        $.ajax({
+           url:"http://localhost:8080//wine/wine/z2/1",
+           method:"GET",
+           success:function (data) {
+               var str="";
+               for (var i = 0; i < data.length; i++) {
+                   var name = data[i].name;
+                   var url = "http://localhost:8080/"+data[i].url;
+                   // ulTag.appendChild("<li><a href='"+url+"'>"+name+"</a></li>")
+                   str=str+"<li><a href='"+url+"'>"+name+"</a></li><br/>";
+
+               }
+
+               ulTag.innerHTML=str;
+           }
+        });
+    }
+</script>
+</body>
+</html>
