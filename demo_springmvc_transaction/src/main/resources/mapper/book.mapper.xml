@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.book.mapper.BookMapper">
+
+    <resultMap id="baseResultMap" type="com.qianfeng.book.po.TbBook">
+        <id property="bookId" column="book_id" javaType="java.lang.Integer"/>
+        <result property="bookName" column="book_name" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="queryBookByPage" resultMap="baseResultMap">
+        select book_id,book_name from tb_book limit 0,3;
+    </select>
+
+    <insert id="save">
+        insert into tb_book(book_name, author_id) values (#{bookName},#{authorId})
+    </insert>
+
+</mapper>

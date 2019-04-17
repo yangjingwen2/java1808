@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!--识别Component注解-->
+    <context:component-scan base-package="com.qianfeng"/>
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+
+    <!--扫描Mapper-->
+    <bean id="mapperScan" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.qianfeng"/>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db1808"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.mapper.xml"/>
+    </bean>
+
+    <!--将Java对象转换成json格式对象-->
+    <!--结合@ResponseBody使用才有效-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="objectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
+          p:indentOutput="true"
+          p:simpleDateFormat="yyyy-MM-dd"/>
+
+    <!--配置拦截器-->
+    <!--mvc:interceptors配置所有拦截器的根标签-->
+    <!--<mvc:interceptors>
+        &lt;!&ndash;正在执行拦截任务的拦截器&ndash;&gt;
+        <mvc:interceptor>
+
+            &lt;!&ndash;拦截规则，路径。/**代表拦截所有URL&ndash;&gt;
+            &lt;!&ndash;<mvc:mapping path="/**"/>&ndash;&gt;
+            &lt;!&ndash;将所有静态资源放行&ndash;&gt;
+            <mvc:exclude-mapping path="/js/jquery-3.1.1.js"/>
+            <mvc:exclude-mapping path="/pages/login.html"/>
+            <mvc:exclude-mapping path="/user/*"/>
+
+            &lt;!&ndash;真正的拦截器，拦截器的实例&ndash;&gt;
+            <bean class="com.qianfeng.user.intercepter.PermissionIntercepter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+    <!--配置声明式事务-->
+    <!--采用数据源事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--允许事务以注解的方式进行配置-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+
+
+</beans>
