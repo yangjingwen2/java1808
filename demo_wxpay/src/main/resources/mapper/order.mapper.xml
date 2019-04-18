@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.OrderMapper">
+
+    <insert id="save">
+        insert into tb_order(order_goods_name, order_goods_price, order_goods_num, order_no, order_status)
+        VALUES(#{orderGoodsName},#{orderGoodsPrice},#{orderGoodsNum},#{orderNo},#{orderStatus})
+    </insert>
+</mapper>
