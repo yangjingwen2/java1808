@@ -10,4 +10,8 @@
         select money from tb_wallet where wallet_id=1;
     </select>
 
+    <update id="kouFrozenMoney">
+        update tb_wallet set frozen=frozen-#{frozen} where wallet_id=1;
+    </update>
+
 </mapper>

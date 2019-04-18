@@ -105,8 +105,26 @@
       <version>1.2</version>
       <scope>provided</scope>
     </dependency>
-
+    <dependency>
+      <groupId>io.goeasy</groupId>
+      <artifactId>goeasy-sdk</artifactId>
+      <version>0.3.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.2</version>
+    </dependency>
   </dependencies>
+
+  <!--配置goeasy私有仓库-->
+  <repositories>
+    <repository>
+      <id>goeasy</id>
+      <name>goeasy</name>
+      <url>http://maven.goeasy.io/content/repositories/releases/</url>
+    </repository>
+  </repositories>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>支付二维码</title>
+
+    <script type="text/javascript" src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
+    <script type="text/javascript">
+        var goEasy = new GoEasy({
+            appkey: 'BS-1c38afb26a204fc59a318265155eac96'
+        });
+
+        goEasy.subscribe({
+            channel:'java1808', //发消息频道和收消息频道要是同一个频道。
+            onMessage: function(message){
+                alert('收到：'+message.content);
+                window.location.href="order.html";
+            }
+        });
+        //GoEasy-OTP可以对appkey进行有效保护，详情请参考：GoEasy-Reference
+    </script>
 </head>
 <body>
 <img src="orderwx?baseURL=http://njehyu.natappfree.cc">

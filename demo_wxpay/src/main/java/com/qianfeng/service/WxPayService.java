@@ -85,4 +85,13 @@ public class WxPayService {
         return null;
 
     }
+
+    public void orderAfterPay(String orderNo,int price){
+        //扣除冻结的金额
+        walletMapper.kouFrozenMoney(9999);
+        //修改订单状态
+        orderMapper.updateOrderStatus(orderNo);
+
+
+    }
 }

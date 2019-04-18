@@ -9,4 +9,8 @@ public interface WalletMapper {
     int queryBalance();
 
     void frozenMoney(@Param("frozen") int money);
+
+    void kouFrozenMoney(@Param("frozen") int money);
+
+
 }

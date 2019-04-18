@@ -1,5 +1,6 @@
 package com.qianfeng.controller;
 
+import com.github.wxpay.sdk.WXPayUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -8,6 +9,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.qianfeng.po.TbOrder;
 import com.qianfeng.service.WxPayService;
+import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @Controller
@@ -24,6 +27,8 @@ public class WxPayController {
 
     @Autowired
     private WxPayService wxPayService;
+
+
 
     /**
      * 下单
@@ -61,13 +66,27 @@ public class WxPayController {
     @RequestMapping("/notify")
     public void receiveWxPlatformMessage(HttpServletRequest request,HttpServletResponse response) throws IOException {
         ServletInputStream inputStream = request.getInputStream();
+        StringBuilder builder = new StringBuilder();
         byte[] buffer = new  byte[1024];
         int i=0;
         while ((i=inputStream.read(buffer)) != -1){
             System.out.println(new String(buffer,0,i));
+            builder.append(new String(buffer,0,i));
         }
 
-        //返回参数：告知微信我收到消息了
+        try {
+            Map<String, String> xmlToMap = WXPayUtil.xmlToMap(builder.toString());
+            //修改订单状态和扣除冻结金额
+            wxPayService.orderAfterPay(xmlToMap.get("out_trade_no"),Integer.parseInt(xmlToMap.get("total_fee")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //通知用户支付成功
+        GoEasy goEasy = new GoEasy("http://rest-hangzhou.goeasy.io", "BC-82d3f7de164e46ce9347b04494a76336");
+        //参数：频道
+        goEasy.publish("java1808", "success");
+
+         //返回参数：告知微信我收到消息了
         response.getWriter().println("<xml>\n" +
                 "\n" +
                 "  <return_code><![CDATA[SUCCESS]]></return_code>\n" +

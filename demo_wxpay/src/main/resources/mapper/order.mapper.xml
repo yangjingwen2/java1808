@@ -6,4 +6,8 @@
         insert into tb_order(order_goods_name, order_goods_price, order_goods_num, order_no, order_status)
         VALUES(#{orderGoodsName},#{orderGoodsPrice},#{orderGoodsNum},#{orderNo},#{orderStatus})
     </insert>
+
+    <update id="updateOrderStatus">
+        update tb_order set order_status="已支付" where order_no=#{orderNo}
+    </update>
 </mapper>
