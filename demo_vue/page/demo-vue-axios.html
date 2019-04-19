@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue结合axios</title>
+    <!--1、导入vue.js的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<ul id="list">
+    <li v-for="book in bookList">{{book.bookName}}</li>
+</ul>
+
+<script type="text/javascript">
+    new Vue({
+        el:"#list",
+        data:{
+            bookList:null
+        },
+        //mounted是vue生命周期的钩子函数，此方法是vue自带的生命周期方法
+        mounted() {
+            //访问后台获取数据
+            //mounted处于生命周期定义数据之后，重组html标签之前
+            axios.get("http://localhost:8080/springmvc/book/page/1")
+                //此处this代表是vue对象
+                .then(response =>{ this.bookList = response.data;}
+                )
+
+            // axios.get("http://localhost:8080/springmvc/book/page/1")
+            //     .then(function (response) {
+            //    此处的this代表axios对象
+            //     this.bookList = response.data;
+            // })
+        }
+    });
+</script>
+
+</body>
+</html>

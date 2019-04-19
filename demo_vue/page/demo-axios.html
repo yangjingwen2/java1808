@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios框架</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="getMessage()">点我</button>
+
+<script type="text/javascript">
+    function getMessage() {
+        //axios的get请求。get方法中放的URL。then是后台服务器返回的数据接收方法（回调函数）
+        //response是后台返回的数据参数
+        // axios.get("http://localhost:8080/springmvc/book/page/1").then(function (response) {
+        //     alert(response.data)
+        // })
+
+        axios.post("http://localhost:8080/springmvc/book",{bookName:"axios"})
+            .then(function (response) {
+                //调用成功，执行then
+            alert(response.data)
+        }).catch(function (exception) {
+            //失败就会执行catch方法
+            //获取后台错误
+        })
+    }
+</script>
+</body>
+</html>
