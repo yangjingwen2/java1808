@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.user.mapper.UserMapper">
+
+    <resultMap id="baseResultMap" type="com.qianfeng.user.po.TbUser">
+        <id property="userId" column="user_id" javaType="java.lang.Long"/>
+        <result property="passwordSalt" column="password_salt" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="userPermissionResultMap" type="com.qianfeng.user.info.UserPermissionInfo">
+        <id property="userId" column="user_id" javaType="java.lang.Long"/>
+        <result property="passwordSalt" column="password_salt" javaType="java.lang.String"/>
+        <result property="username" column="username" javaType="java.lang.String"/>
+        <result property="password" column="password" javaType="java.lang.String"/>
+        <result property="roleName" column="role_name" javaType="java.lang.String"/>
+        <collection property="permissionList" column="role_id" ofType="java.lang.String" select="queryPermissionByRoleId"/>
+    </resultMap>
+
+
+    <resultMap id="funcNodeResultMap" type="com.qianfeng.user.po.ParentNode">
+        <id property="pId" column="p_id" javaType="java.lang.Long"/>
+        <result property="pName" column="p_name" javaType="java.lang.String"/>
+        <collection property="childNodeList" ofType="com.qianfeng.user.po.ChildNode">
+            <id column="c_id" property="cId" javaType="java.lang.Long"/>
+            <result column="c_name" property="cName" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <!--登录的SQL-->
+    <select id="checkUsername" resultMap="baseResultMap">
+        select user_id,username,password,password_salt from tb_user where username=#{username};
+    </select>
+
+    <select id="checkUsername2" resultMap="userPermissionResultMap">
+        select u.user_id,u.username,u.password,u.password_salt,r.role_name,r.role_id from tb_user u join tb_role r
+            on u.user_id=r.user_id
+            and u.username=#{username};
+    </select>
+
+    <select id="queryPermissionByRoleId" resultType="java.lang.String">
+        select permission_name from tb_permission where role_id=#{roleId}
+    </select>
+
+    <select id="queryFuncTree" resultMap="funcNodeResultMap">
+        select p1.permission_id as p_id ,p2.permission_id as c_id ,p1.permission_name as p_name,p2.permission_name c_name from tb_permission p1 join tb_permission p2 on p1.permission_id=p2.parent_id;
+    </select>
+</mapper>
