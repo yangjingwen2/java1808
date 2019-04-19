@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中给标签属性赋值</title>
+    <!--1、导入vue.js的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<!--v-bind作用于标签的属性上，使Vue可以给标签属性赋值-->
+<span id="hello" v-bind:title="message">将鼠标悬停在这段文字上，看效果</span>
+
+
+<!--vue的初始化最好放在页面的下方-->
+<script type="text/javascript">
+    new Vue({
+        el:"#hello",
+        data:{
+            message:"震惊！你居然在干这事！"
+        }
+    });
+</script>
+</body>
+</html>

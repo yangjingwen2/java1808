@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的点击事件</title>
+
+    <!--1、导入vue.js的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<!--vue的点击事件需要通过v-on进行定义，showMessage是方法名称-->
+<button id="btn" v-on:click="showMsg">点我</button>
+
+<script type="text/javascript">
+    new Vue({
+        el:"#btn",
+        //methods是Vue对象中定义方法的位置
+        methods:{
+            //showMessage是方法名称
+            showMessage:function () {
+                alert("这是Vue的点击事件")
+            },
+            showMsg:function () {
+                alert("show方法")
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

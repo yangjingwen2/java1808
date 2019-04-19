@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的初见</title>
+
+    <!--1、导入vue.js的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+</head>
+<body>
+
+    <!--<span id="hello"></span>
+
+    <script type="text/javascript">
+        var element = document.getElementById("hello");
+        element.innerText="HelloWorld!";
+    </script>-->
+
+    <div id="all">
+        <!--{{value}}这种形式只能用于显示文本内容（开始标签和结束标签之间的文本内容）-->
+        <!--如果要修改标签属性中的值，就不能使用{{}}-->
+        <span id="h2">{{name}}</span>
+        <span id="hello">{{message}}</span>
+    </div>
+
+    <script type="text/javascript">
+        //初始化Vue
+        var app = new Vue({
+            el:"#all", //Vue要操作的标签的ID
+            //Vue定义变量的位置
+            data:{
+                message:"Vue HelloWorld!", //key：value。vue定义的变量
+                name:"利古拉斯.张三"
+            }
+        });
+    </script>
+
+
+</body>
+</html>

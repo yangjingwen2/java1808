@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的循环</title>
+    <!--1、导入vue.js的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <style type="text/css">
+        .odd{
+            color: green;
+        }
+        .even{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="list">
+    <ul>
+        <li>标题》》》</li>
+        <!--template标签只是一个占位标签，不会对页面造成任何影响-->
+        <template v-for="(stu,index) in students">
+            <!--index是集合的索引，从0开始-->
+            <li v-if="index%2==0" class="even">{{stu.name}}{{index}}</li>
+            <li v-else="index%2!=0" class="odd">{{stu.name}}{{index}}</li>
+        </template>
+    </ul>
+
+</div>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el:"#list",
+        data:{
+            students:[{name:"张三"},{name:"李四"},{name:"王五"}]
+        }
+    });
+</script>
+
+</body>
+</html>
