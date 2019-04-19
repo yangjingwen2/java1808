@@ -3,6 +3,7 @@ package com.qianfeng.user.controller;
 import com.qianfeng.user.exception.PasswordErrorException;
 import com.qianfeng.user.exception.UsernameNotFoundException;
 import com.qianfeng.user.info.UserPermissionInfo;
+import com.qianfeng.user.po.ParentNode;
 import com.qianfeng.user.po.TbUser;
 import com.qianfeng.user.service.UserService;
 import com.qianfeng.user.vo.JsonResultVO;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")//根目录
@@ -46,14 +48,14 @@ public class UserController {
     @ResponseBody
     @PostMapping("/login2")
     public JsonResultVO loginAjax(LoginInfoVO loginInfoVO, HttpSession session) throws Exception{
-//        JsonResultVO jsonResultVO = new JsonResultVO();
-        JsonResultVO jsonResultVO = null;
+        JsonResultVO jsonResultVO = new JsonResultVO();
+//        JsonResultVO jsonResultVO = null;
         try {
             UserPermissionInfo user = userService.login(loginInfoVO);
             session.setAttribute("user",user);
             jsonResultVO.setCode(1);
 
-            System.out.println("--->"+user.getPermissionList().get(0));
+//            System.out.println("--->"+user.getPermissionList().get(0));
         }
 //        catch (NullPointerException e){
 //            e.printStackTrace();
@@ -76,5 +78,15 @@ public class UserController {
         /*重定向不会经过视图解析器*/
         //{code:1,msg:'登录成功'}，code是用来进行条件判断的，msg用来显示
        return jsonResultVO;
+    }
+
+    @ResponseBody
+    @RequestMapping("func")
+    public List<ParentNode> queryFuncTree(HttpSession session){
+        UserPermissionInfo user = (UserPermissionInfo) session.getAttribute("user");
+        List<ParentNode> parentNodeList = user.getParentNodeList();
+        return parentNodeList;
+
+
     }
 }

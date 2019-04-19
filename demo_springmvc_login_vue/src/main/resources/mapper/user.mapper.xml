@@ -13,7 +13,7 @@
         <result property="username" column="username" javaType="java.lang.String"/>
         <result property="password" column="password" javaType="java.lang.String"/>
         <result property="roleName" column="role_name" javaType="java.lang.String"/>
-        <collection property="permissionList" column="role_id" ofType="java.lang.String" select="queryPermissionByRoleId"/>
+        <collection property="parentNodeList" column="role_id" select="queryFuncTree"/>
     </resultMap>
 
 
@@ -41,7 +41,13 @@
         select permission_name from tb_permission where role_id=#{roleId}
     </select>
 
+    <!--  select p1.permission_id as p_id ,p2.permission_id as c_id ,p1.permission_name as p_name,p2.permission_name c_name from tb_permission p1 join tb_permission p2 on p1.permission_id=p2.parent_id;-->
     <select id="queryFuncTree" resultMap="funcNodeResultMap">
-        select p1.permission_id as p_id ,p2.permission_id as c_id ,p1.permission_name as p_name,p2.permission_name c_name from tb_permission p1 join tb_permission p2 on p1.permission_id=p2.parent_id;
+            select p1.permission_id as p_id ,p2.permission_id as c_id ,p1.permission_name as p_name,p2.permission_name c_name
+            from tb_permission p1
+            join tb_permission p2
+            on p1.permission_id=p2.parent_id
+            and p1.role_id=p2.role_id
+            and p1.role_id=#{roleId};
     </select>
 </mapper>

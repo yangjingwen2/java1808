@@ -1,5 +1,6 @@
 package com.qianfeng.login;
 
+import com.qianfeng.user.info.UserPermissionInfo;
 import com.qianfeng.user.mapper.UserMapper;
 import com.qianfeng.user.po.ParentNode;
 import com.qianfeng.user.po.TbUser;
@@ -37,5 +38,11 @@ public class SpringTest {
     public void testCase2(){
         List<ParentNode> parentNodes = userMapper.queryFuncTree();
         System.out.println(parentNodes);
+    }
+
+    @Test
+    public void testCase3(){
+        UserPermissionInfo zhangsan = userMapper.checkUsername2("zhangsan");
+        System.out.println(zhangsan);
     }
 }

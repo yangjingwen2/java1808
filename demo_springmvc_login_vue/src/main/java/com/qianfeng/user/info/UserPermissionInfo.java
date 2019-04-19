@@ -1,5 +1,7 @@
 package com.qianfeng.user.info;
 
+import com.qianfeng.user.po.ParentNode;
+
 import java.util.List;
 
 public class UserPermissionInfo {
@@ -9,7 +11,18 @@ public class UserPermissionInfo {
     private String password;
     private String passwordSalt;
     private String roleName;
+    @Deprecated
     private List<String> permissionList;
+
+    private List<ParentNode> parentNodeList;
+
+    public List<ParentNode> getParentNodeList() {
+        return parentNodeList;
+    }
+
+    public void setParentNodeList(List<ParentNode> parentNodeList) {
+        this.parentNodeList = parentNodeList;
+    }
 
     public long getUserId() {
         return userId;
@@ -51,10 +64,12 @@ public class UserPermissionInfo {
         this.roleName = roleName;
     }
 
+    @Deprecated
     public List<String> getPermissionList() {
         return permissionList;
     }
 
+    @Deprecated
     public void setPermissionList(List<String> permissionList) {
         this.permissionList = permissionList;
     }
