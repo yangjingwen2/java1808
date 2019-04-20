@@ -9,6 +9,7 @@ import com.qianfeng.user.vo.LoginInfoVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,9 +61,17 @@ public class UserController {
             jsonResultVO.setCode(0);
             jsonResultVO.setMsg("登录失败，用户名或者密码错误");
         }
-//
+
         /*重定向不会经过视图解析器*/
         //{code:1,msg:'登录成功'}，code是用来进行条件判断的，msg用来显示
        return jsonResultVO;
+    }
+
+    @RequiresPermissions({"商品管理"})
+    @RequestMapping("demo")
+    @ResponseBody
+    public String demo() throws Exception{
+
+        return "shiro权限";
     }
 }

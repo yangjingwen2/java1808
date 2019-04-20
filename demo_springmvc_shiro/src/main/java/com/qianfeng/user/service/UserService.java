@@ -13,11 +13,18 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    public List<String> queryPermissions(String username){
+        List<String> permission = userMapper.queryPermissionByUsername(username);
+        return permission;
+    }
 
     /**
      * 登录

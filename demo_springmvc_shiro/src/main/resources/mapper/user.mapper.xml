@@ -11,4 +11,11 @@
     <select id="checkUsername" resultMap="baseResultMap">
         select user_id,username,password,password_salt from tb_user where username=#{username};
     </select>
+
+    <select id="queryPermissionByUsername" resultType="java.lang.String">
+        select p.permission_name from tb_user u join tb_role r join tb_permission p
+            on u.user_id=r.user_id
+            and r.role_id = p.role_id
+            and u.username=#{username};
+    </select>
 </mapper>

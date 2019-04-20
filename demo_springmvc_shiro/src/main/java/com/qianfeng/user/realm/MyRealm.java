@@ -5,9 +5,12 @@ import com.qianfeng.user.service.UserService;
 import com.qianfeng.user.vo.LoginInfoVO;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * shiro利用realm进行用户登录的数据查询和逻辑判断、并且进行权限和角色数据查询
@@ -20,12 +23,19 @@ public class MyRealm extends AuthorizingRealm {
 
     /**
      * 查询权限和角色信息
-     * @param principals
+     * @param principals 获取登录成功的用户的用户名。doGetAuthenticationInfo方法值中封装的用户名
      * @return
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return null;
+        String username = principals.getPrimaryPrincipal().toString();
+        //查询用户的权限信息
+        List<String> permissions = userService.queryPermissions(username);
+
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.addStringPermissions(permissions);
+
+        return simpleAuthorizationInfo;
     }
 
     /**

@@ -47,6 +47,9 @@
     <!--SHiro委派给Spring完成的过滤器功能-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login.jsp"/>
+        <!--没有权限会进入此配置页面-->
+        <property name="unauthorizedUrl" value="/auth.html"/>
         <!-- override these for application-specific URLs if you like:
         <property name="loginUrl" value="/login.jsp"/>
         <property name="successUrl" value="/home.jsp"/>
@@ -59,15 +62,13 @@
                 <entry key="anAlias" value-ref="someFilter"/>
             </util:map>
         </property> -->
-        <!--<property name="filterChainDefinitions">
+        <!--配置拦截规则-->
+        <property name="filterChainDefinitions">
+            <!--authc标识必须登录-->
             <value>
-                # some example chain definitions:
-                /admin/** = authc, roles[admin]
-                /docs/** = authc, perms[document:read]
-                /** = authc
-                # more URL-to-FilterChain definitions here
+               /hello.jsp=authc,perms[商品管理]
             </value>
-        </property>-->
+        </property>
     </bean>
 
 
@@ -91,6 +92,12 @@
     </bean>
 
 
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+    <!-- the lifecycleBeanProcessor has run: -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
 
 </beans>
