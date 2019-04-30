@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>点赞</title>
+    <!--1、导入vue.js的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<div id="container">
+    <ul id="list">
+        <li><img id="goods_2002" src="images/no_zan.png" name="1" v-on:click="zan('goods_2002','10001','2002')"></li>
+        <li><img id="goods_2003" src="images/no_zan.png" name="0" v-on:click="zan('goods_2003','10001','2003')"></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    new Vue({
+        el:"#container",
+        data:{
+            default_url:'images/no_zan.png'
+        },
+        mounted(){
+            axios.get("http://localhost:8080/redis/douyin/query/10001").then(function(data){
+                console.log(data.data[0]);
+
+        })
+        },
+        methods:{
+            zan:function (id,userId,videoId) {
+                var idStr = "#"+id;
+                var nameValue = $(idStr).attr("name");
+                if (nameValue == "0") {
+                    $(idStr).attr("src","images/zan.png");
+                    $(idStr).attr("name","1");
+                    axios.get("douyin/"+userId+"/"+videoId).then(function (data) {
+                        alert(data);
+                    });
+                } else {
+                    $(idStr).attr("src","images/no_zan.png");
+                    $(idStr).attr("name","0");
+                    axios.get("douyin/"+userId+"/"+videoId).then(function (data) {
+                        alert(data);
+                    });
+                }
+            }
+        }
+    });
+
+    function init() {
+        axios.get("http://localhost:8080/redis/douyin/query/10001").then(function(data){
+            console.log(data.data[0]);
+
+            var imageArrayNodes = $("#list").find("img");
+
+            for (var i=0;i<data.data.length;i++){
+                var key = data.data[i];
+                var keyItems = key.split("-");
+                var len = keyItems.length-1;
+                for (var j=0;j<imageArrayNodes.length;j++) {
+                    var id = $(imageArrayNodes[j]).attr("id");
+                    if (("goods_"+keyItems[len]) == id){
+                        $(imageArrayNodes[j]).attr("src","images/zan.png")
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    init();
+</script>
+</body>
+</html>
