@@ -1,0 +1,89 @@
+/*通用大弹出框*/
+
+.tyd_box{ background-color:#bdbdbd; overflow:hidden; width:502px;}
+
+.tyd_box_c{  background-color:#FFF; padding:0 14px;}
+
+.tyd_box_content{ line-height:25px; padding:10px 0}
+
+
+
+.tyd_box_title{ font-family:"微软雅黑"; height:44px; line-height:44px; border-bottom:1px solid #ff8000; position:relative}
+
+.tyd_box_title span{ font-size:16px; color:#ff8000}
+
+.tyd_box_title a{ position:absolute; right:0px; top:10px}
+
+
+
+
+
+.Loading {position:absolute;left:10px;z-index:9999;border:0px;top:10px; width:646px; font-size:12px; overflow:hidden; }
+
+.Loading_server {position:absolute;left:10px;z-index:9999;border:0px;top:10px; width:524px; font-size:12px; overflow:hidden; }
+
+.Loading_showimg {position:absolute;left:10px;z-index:9999;border:0px;top:10px; width:788px; font-size:12px; overflow:hidden; }
+
+#mbDIV_members{position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;background-color:#333;z-index:9998;filter: alpha(opacity=70);opacity:0.7;}
+
+
+
+
+
+
+
+.Loading_server  .tyd_box{ background-color:#bdbdbd; border:none;overflow:hidden; width:524px; }
+
+.Loading_server  .tyd_box_c{ background-color:#FFF; padding:0 !important; border:none}
+
+.Loading_server  .tyd_box_content{ padding:0 !important;}
+
+
+
+.Loading_server  .tyd_box_title{ height:48px; border:none !important; position:relative; padding:0!important;}
+
+.Loading_server  .tyd_box_title span{ font-size:16px; color:#ff8000}
+
+.Loading_server  .tyd_box_title a{ position:absolute; right:14px; top:10px}
+
+
+
+
+
+.Loading_showimg  .tyd_box{ background-color:#fff; border:none;overflow:hidden; width:788px !important; }
+
+.Loading_showimg  .tyd_box_c{ background-color:#FFF; padding:0 !important; border:none}
+
+.Loading_showimg  .tyd_box_content{ padding:0 !important;}
+
+
+
+.Loading_showimg  .tyd_box_title{ height:48px; border:none !important; position:relative; padding:0!important;}
+
+.Loading_showimg  .tyd_box_title span{ font-size:16px; color:#ff8000}
+
+.Loading_showimg  .tyd_box_title a{ position:absolute; right:14px; top:10px}
+
+
+
+
+
+.Loading_server_expedition {position:absolute;left:10px;z-index:9999;border:0px;top:10px; width:724px; font-size:12px; overflow:hidden; }
+
+.Loading_server_expedition  .tyd_box{ background-color:#bdbdbd; border:none;overflow:hidden; width:724px; }
+
+.Loading_server_expedition  .tyd_box_c{ background-color:#FFF; padding:0 !important; border:none}
+
+.Loading_server_expedition  .tyd_box_content{ padding:0 !important;}
+
+
+
+.Loading_server_expedition  .tyd_box_title{ height:48px; border:none !important; position:relative; padding:0!important;}
+
+.Loading_server_expedition  .tyd_box_title span{ font-size:16px; color:#ff8000}
+
+.Loading_server_expedition  .tyd_box_title a{ position:absolute; right:14px; top:10px}
+
+/*修改银行卡*/
+
+.xgyhk{}

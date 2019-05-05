@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.assess.mapper.TypeMapper">
+    <resultMap id="typeResultMap" type="com.qianfeng.assess.vo.PtypeVO">
+        <id property="pId" column="p_id" javaType="java.lang.Long"/>
+        <result property="pName" column="p_name" javaType="java.lang.String"/>
+        <collection property="pCtypeList" ofType="com.qianfeng.assess.vo.CtypeVO">
+            <id property="cId" column="c_id" javaType="java.lang.Long"/>
+            <result property="cName" column="c_name" javaType="java.lang.String"/>
+            <result property="cDesc" column="c_desc" javaType="java.lang.String"/>
+            <result property="cPrice" column="c_price" javaType="java.lang.Long"/>
+        </collection>
+    </resultMap>
+    <select id="queryPtype" resultMap="typeResultMap">
+        select t1.type_id as p_id ,t2.type_id as c_id ,t1.type_name as p_name,t2.type_name as c_name,
+         t2.type_particulars as c_desc,tw.wreck_money as c_price
+            from tb_type t1
+            join tb_type t2
+            on t1.type_id=t2.type_parent
+            join tb_wreck tw on t2.type_id = tw.type_id
+            and t1.type_types=t2.type_types
+            and tw.phone_id=#{phoneId}
+            and t1.type_types=#{types}
+    </select>
+</mapper>

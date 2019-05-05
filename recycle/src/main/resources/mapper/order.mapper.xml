@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.order.mapper.OrderMapper">
+    <insert id="addOrder">
+        insert into tb_order (user_id, order_phone, order_num, order_price, pay_id, link_name, mobile, province, city, district, school_id,
+        address, stime, etime, express_true, member_bank, bankname, realname, card_sn, loco, pwd, alipay_realname, alipay_username, mianjiaoMethod_2,
+        ditie_xian, ditie_zhan, shop_id)
+         values (#{order.userId},#{order.orderPhone},#{order.orderNum},#{order.orderPrice},#{order.payId},
+        #{order.linkName},#{order.mobile},#{order.province},#{order.city},#{order.district},#{order.schoolId},#{order.address},
+        #{order.stime},#{order.etime},#{order.expressTrue},#{order.memberBank},#{order.bankname},
+        #{order.realname},#{order.cardSn},#{order.lock},#{order.pwd},#{order.alipayRealname},#{order.alipayUsername},
+        #{order.mianjiaoMethod2},#{order.ditieXian},#{order.ditieZhan},#{order.shopId}
+        );
+    </insert>
+        <delete id="deleteShop">
+            delete from tb_shopping where shop_user_id=#{userId}
+        </delete>
+</mapper>

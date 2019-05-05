@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.user.mapper.UserMapper">
+    <resultMap id="loginResultMap" type="com.qianfeng.user.po.TbUser">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPhone" column="user_phone"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userAdd" column="user_add"/>
+        <result property="userAdd1" column="user_add1"/>
+        <result property="userAdd2" column="user_add2"/>
+        <result property="userBank" column="user_bank"/>
+        <result property="userWx" column="user_wx"/>
+        <result property="userFreez" column="user_freez"/>
+        <result property="userMoney" column="user_money"/>
+    </resultMap>
+    <sql id="userSql">
+        user_id,user_name, user_phone,user_password,user_add,user_add1,user_add2,user_bank,user_wx,user_freez,user_money
+    </sql>
+    <select id="login" resultMap="loginResultMap">
+        select <include refid="userSql"/> from tb_user where user_phone = #{username}
+    </select>
+    <insert id="addUser">
+        insert into tb_user ( user_name,user_phone,user_password,user_add,user_add1,user_add2,user_bank,user_wx )
+        values (#{user.userName},
+        #{user.userPhone},#{user.userPassword},#{user.userAdd},#{user.userAdd1},#{user.userAdd2},
+        #{user.userBank},#{user.userWx})
+    </insert>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.phone.mapper.BrandMapper">
+    <resultMap id="brandResultMap" type="com.qianfeng.phone.vo.BrandVO">
+        <id property="phoneId" column="phone_id"/>
+        <result property="phoneName" column="phone_name"/>
+    </resultMap>
+    <resultMap id="phoneResultMap" type="com.qianfeng.phone.po.TbPhone">
+        <id property="phoneId" column="phone_id"/>
+        <result property="phoneName" column="phone_name"/>
+        <result property="phoneParent" column="phone_parent"/>
+        <result property="phonePrice" column="phone_price"/>
+        <result property="phonePic" column="phone_pic"/>
+    </resultMap>
+    <select id="queryBrand" resultMap="brandResultMap">
+        select phone_id,phone_name from tb_phone where phone_parent = 0
+    </select>
+
+    <select id="queryPhone" resultMap="phoneResultMap">
+        select phone_id,phone_name,phone_pic,phone_price from tb_phone where phone_parent>0
+    </select>
+    <select id="queryBrandPhone" resultMap="phoneResultMap">
+        select phone_id,phone_name,phone_pic,phone_price from tb_phone where phone_parent>0 and phone_parent=#{brandId}
+    </select>
+    <select id="queryPhoneByPhoneName" resultMap="phoneResultMap">
+        select p2.phone_id,p2.phone_name,p2.phone_pic,p2.phone_price from
+        tb_phone p1 join tb_phone p2 on p1.phone_id=p2.phone_parent
+        and p2.phone_parent>0 and (p2.phone_name like '%${seek}%' or
+        p1.phone_name like '%${seek1}%')
+    </select>
+</mapper>

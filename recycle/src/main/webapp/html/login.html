@@ -1,0 +1,136 @@
+
+<!-- saved from url=(0043)http://javen666.com:8080/ihuishou/login.jsp -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>登录-回购网 -  手机回收网 | 二手手机交易 | 笔记本回收 | 平板回收</title>
+    <!--<base href="/ihuishou/">--><base href=".">
+    <link rel="icon" href="http://javen666.com/huishou/small_logo.ico">
+    <script type="text/javascript" src="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/new_public.js.下载"></script>
+    <link href="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/global.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/jquery-1.4.2.js.下载"></script>
+</head>
+<body style=" background:#fff">
+<form method="post" id="login_form" name="login_form" action="http://javen666.com:8080/ihuishou/">
+    <input type="hidden" id="t" name="t" value="login">
+    <input type="hidden" id="hidd_validate_code" name="hidd_validate_code" value="2bc38f170b805c7217c71eeeb9ba7a19">
+    <!--注册-->
+    <div class="regist_top page"><a href="http://javen666.com:8080/ihuishou/"><img src="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/logo.png" style="vertical-align:middle"></a><span>欢迎登录</span></div>
+    <div class="regist">
+        <div class="regist_l"><img src="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/bg4.png"></div>
+        <div class="regist_r">
+            <div class="c2"><span>登录名</span>
+                <div class="c1_bg">
+
+                    <input type="text" name="username" v-model="username" id="username" class="input_txt3" value="">
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+            <div class="c2" style="margin-bottom:0"><span>密码</span>
+                <div class="c1_bg">
+                    <input type="password" name="password" v-model="password" id="password" class="input_txt5" onkeydown="if(event.keyCode==13) return submit_login_form();">
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="c2" style="height:42px; line-height:42px; margin-bottom:0"><span>&nbsp;</span>
+                <label>
+                  <input id="remeberMe" name="remeberMe" type="checkbox" value="true">
+                  <em>两周内自动登录</em></label>
+                
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div class="c2"><span>&nbsp;</span>
+                <input type="button" value="立即登录" id="sub_button" class="input_btn3" onclick="submit_login_form()">
+                <div class="clear"></div>
+            </div>
+            <div class="c2"><span>&nbsp;</span><a href="register.html" class="hg_btn">注册加入回购网</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <!--注册-->
+</form>
+<link rel="stylesheet" type="text/css" href="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/alert_zhe.css">
+
+<script type="text/javascript" src="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/alert_zhe.js.下载"></script>
+<!-- 弹出框start -->
+<div id="Loading_child" class="Loading" style="display:none; height:450px;" ondblclick="ttt('Loading_child');">
+    <div class="tyd_box">
+        <div class="tyd_box_c">
+            <div class="tyd_box_title">
+                <span id="Loading_child_title"></span><a href="javascript:ttt('Loading_child')"><img src="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/close1.gif" border="0"></a>
+            </div>
+            <div class="tyd_box_content" style="width:612px;overflow:auto; height:360px;">
+                <iframe id="Loading_child_iframe_id" name="iframe_id" width="612" height="360" border="0" frameborder="0" src="./登录-回购网 - 手机回收网 _ 二手手机交易 _ 笔记本回收 _ 平板回收_files/saved_resource.html"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mbDIV" style="display:none;"></div>
+<!--  弹出框end -->
+
+
+<script>
+//     function submit_login_form(settle){
+//         if($.trim($("#username").val())==''	||	$.trim($("#username").val())=='用户名'){
+//             alert("请输入登录账户！");
+//             $("#username").focus();
+//             return false;
+//         }
+//         if($.trim($("#password").val())==''){
+//             alert("请输入登录密码！");
+//             $("#password").focus();
+//             return false;
+//         }
+// //        alert(settle);
+//         $.post("/ihuishou/user/login",
+//                 {
+//                     userName:$("#username").val(),
+//                     userPassword:$("#password").val(),
+//                     remeberMe:$("#remeberMe").val(),
+//                     settle:settle
+//                 },function(data){
+//                     alert(data);
+//                     if(data=="failed"){
+//                         alert("用户名或者密码错误");
+//                     }else if(data == "unknown") {
+//                         alert("用户不存在")
+//                     } else if(data == "mistake") {
+//                         alert("密码错误")
+//                     }  else if(data == "settle"){
+//                         window.location.href="/ihuishou/good/order";
+//                     } else {
+//                         window.location.href="/ihuishou/good/home";
+//                     }
+//                 });
+//     }
+        function submit_login_form(){
+
+            var username = $("#username").val();
+            var password = $("#password").val();
+            //将用户名和密码通过ajax提交到后台
+            //参数1：URL，需要发送数据的后台地址
+            //参数2：需要发送到指定URL的数据，只能是json数据
+            //参数3：后台返回的数据，回调函数
+            $.post("../user/login",
+                {username:username,password:password},
+                function (data) {
+
+                    if (data.code == 1) {
+                        //登录成功
+                        window.location.href="index.html";
+                    } else  if (data.code==2){
+                        window.location.href=data.msg;
+                    } else {
+                        alert("登录失败："+data.msg);
+                    }
+                });
+        }
+//    function find_pwd(url){
+//        open_div_extends('找回密码',url,'Loading_child');
+//    }
+</script>
+</body></html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.assess.mapper.ShoppingMapper">
+    <resultMap id="carResultMap" type="com.qianfeng.assess.vo.CarVO">
+        <id property="shoppingId" column="id" javaType="java.lang.Long"/>
+        <result property="shopId" column="shop_phone_id" javaType="java.lang.Long"/>
+        <result property="shopPic" column="phone_pic" javaType="java.lang.String"/>
+        <result property="shopPhoneName" column="phone_name" javaType="java.lang.String"/>
+        <result property="shopWreckPrice" column="shop_wreck_price" javaType="java.lang.Long"/>
+    </resultMap>
+    <insert id="addShoppingCar">
+        insert into tb_shopping (shop_phone_pic, shop_wreck_type, shop_wreck_price, shop_phone_id,shop_user_id) values (
+        #{shopping.shopPhonePic},#{shopping.shopWreckType},#{shopping.shopWreckPrice},#{shopping.shopPhoneId},
+        #{shopping.shopUserId}
+        );
+    </insert>
+    <select id="queryShoppingCar" resultMap="carResultMap">
+        select s.id,s.shop_phone_id,p.phone_name,p.phone_pic,s.shop_wreck_price from
+         tb_phone p join tb_shopping s on p.phone_id=s.shop_phone_id
+         where s.shop_user_id=#{userId}
+    </select>
+    <delete id="deleteCar">
+        delete from tb_shopping where id=#{cartId}
+    </delete>
+</mapper>

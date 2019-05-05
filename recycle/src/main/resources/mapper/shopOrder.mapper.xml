@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.order.mapper.ShopOrderMapper">
+    <resultMap id="shopOrderResultMap" type="com.qianfeng.order.vo.ShopOrderVO">
+        <id property="shoppingId" column="id" javaType="java.lang.Long"/>
+        <result property="shopId" column="shop_phone_id" javaType="java.lang.Long"/>
+        <result property="shopPic" column="phone_pic" javaType="java.lang.String"/>
+        <result property="shopPhoneName" column="phone_name" javaType="java.lang.String"/>
+        <result property="shopWreckPrice" column="shop_wreck_price" javaType="java.lang.Long"/>
+        <result property="shoppingType" column="shop_wreck_type" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="queryShopOrder" resultMap="shopOrderResultMap">
+          select s.id,s.shop_phone_id,p.phone_name,p.phone_pic,s.shop_wreck_price,s.shop_wreck_type from
+         tb_phone p join tb_shopping s on p.phone_id=s.shop_phone_id
+         where s.shop_user_id=#{userId}
+    </select>
+</mapper>
